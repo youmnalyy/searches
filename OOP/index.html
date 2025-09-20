@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Class OOP</title>
+</head>
+<body style="font-family: Arial; padding: 20px;">
+
+<h2>Products List</h2>
+<div id="productsContainer"></div>
+
+<script>
+  // Step 1: Define a class
+  class Product {
+    constructor(name, price, brand, description, tax) {
+      this.name = name;
+      this.price = price;
+      this.brand = brand;
+      this.description = description;
+      this.tax = tax; // percentage (e.g., 10 means 10%)
+    }
+
+    getName() {
+      return this.name;
+    }
+
+    priceAfterDiscount(discount) {
+      return this.price - (this.price * discount / 100);
+    }
+
+    getFinalPrice() {
+      return this.price + (this.price * this.tax / 100);
+    }
+  }
+
+  // Step 2: Make three objects
+  const product1 = new Product("iPhone 15", 40000, "Apple", "Latest Apple iPhone with A17 chip", 15);
+  const product2 = new Product("Galaxy S23", 30000, "Samsung", "Samsung flagship with amazing camera", 12);
+  const product3 = new Product("PlayStation 5", 25000, "Sony", "Next-gen gaming console", 10);
+
+  const products = [product1, product2, product3];
+
+  // Step 3: Display in simple HTML
+  const container = document.getElementById("productsContainer");
+
+  products.forEach(p => {
+    container.innerHTML += `
+      <div style="border:1px solid #ccc; padding:15px; margin-bottom:10px;">
+        <h3>${p.getName()} (${p.brand})</h3>
+        <p><strong>Description:</strong> ${p.description}</p>
+        <p><strong>Original Price:</strong> ${p.price} EGP</p>
+        <p><strong>Price After 10% Discount:</strong> ${p.priceAfterDiscount(10)} EGP</p>
+        <p><strong>Final Price (with Tax):</strong> ${p.getFinalPrice()} EGP</p>
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>
